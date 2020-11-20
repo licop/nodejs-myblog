@@ -40,18 +40,27 @@ const serverHandle = (req, res) => {
 
     // 处理postdata
     getPostData(req).then(postData => {
-        req.body = postData
+        req.body = postData;
+        const bolgResult = handleBlogRouter(req, res);
+        const userResult = handleUserRouter(req, res);
 
-        let blogData = handleBlogRouter(req, res);
-        if(blogData) {
-            res.end(JSON.stringify(blogData));
+        if(bolgResult) {
+            bolgResult.then(blogData => {
+                res.end(
+                    JSON.stringify(blogData)
+                )
+            })
             return;
         }
-        let userData = handleUserRouter(req, res);
-        if(userData) {
-            res.end(JSON.stringify(userData));
+        if(userResult) {
+            userResult.then(userData => {
+                res.end(
+                    JSON.stringify(userData)
+                )
+            })
             return;
         }
+
         res.writeHead(404, {"Content-type": "text-plain"});
         res.write("404 not found/n");
         res.end();

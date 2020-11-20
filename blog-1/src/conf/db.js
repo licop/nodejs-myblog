@@ -1,9 +1,9 @@
 const env = process.env.NODE_ENV; // 参数环境
-
-let MYSLQ_CONF;
+console.log(env, 2);
+let MYSQL_CONF;
 
 if(env === 'dev') {
-    let MYSLQ_CONF = {
+    MYSQL_CONF = {
         host: 'localhost',
         user: 'root',
         password: 'password',
@@ -13,7 +13,7 @@ if(env === 'dev') {
 } 
 
 if(env === 'production') {
-    let MYSLQ_CONF = {
+    MYSQL_CONF = {
         host: 'localhost',
         user: 'root',
         password: 'password',
@@ -23,6 +23,6 @@ if(env === 'production') {
 }
 
 module.exports = {
-    MYSLQ_CONF
+    MYSQL_CONF
 }
 

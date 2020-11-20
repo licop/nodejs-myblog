@@ -8,7 +8,7 @@ const con = mysql.createConnection(MYSQL_CONF);
 con.connect();
 
 // 统一执行sql函数
-function exex(sql) {
+function exec(sql) {
     return new Promise((relove, reject) => {
         con.query(sql, (err, result) => {
             if(err) {
