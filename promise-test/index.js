@@ -1,7 +1,6 @@
 const fs = require('fs');
 const path = require('path');
 
-
 function getFileContent(fileName) {
     return new Promise((resolve, reject) => {
         const fullFileName = path.resolve(__dirname, 'files', fileName);
@@ -22,5 +21,6 @@ async function consoleData() {
     await getFileContent('b.json')
 
     await getFileContent('c.json')
-} 
+}
+
 consoleData();
