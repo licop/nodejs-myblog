@@ -37,7 +37,21 @@ const serverHandle = (req, res) => {
     req.path = url.split('?')[0];
     
     req.query = querystinrg.parse(url.split('?')[1]);
+    // 解析cookie
+    req.cookie = {};
+    
+    const cookieStr = req.headers.cookie || ''; // k1=v1; k2=v2; 
+    cookieStr.split(';').forEach(item => {
+        if(!item) {
+            return 
+        }
+        const arr = item.split('=');
+        const key = arr[0];
+        const val = arr[1];
+        req.cookie[key] = val;
 
+    });
+    
     // 处理postdata
     getPostData(req).then(postData => {
         req.body = postData;

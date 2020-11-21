@@ -89,11 +89,27 @@ nodejs可以使用vscode和chrome进行调试
 -- select * from users where state = 1;
 -- select * from users where state <> 0; -- 不等于
 -- update users set state = '1' where username='lisi';  -- 软删除， state=0代表删除
+
  ```
  
 - 更改数据库用户名和密码 `ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password'`  `flush privileges;`
 - [npm mysql文档](https://www.oschina.net/translate/node-mysql-tutorial)
 - [nodejs 连接mysql](https://www.runoob.com/nodejs/nodejs-mysql.html)
+
+## cookie和session
+
+- 登录
+  - 登录校验 & 登录信息存储
+- cookie 
+    - 存储在浏览器中的一段字符串
+    - 跨域不共享
+    - 格式k1=v1;k2=v2;k3=v3; 可以存储结构化数据
+    - 每次发起http请求，会将请求域的cookie一起发送给server
+    - server可以通过修改cookie并返回浏览器
+    - 浏览器可以通过javascript修改cookie(有限制)
+- server端操作cookie
+   - 客户端把登录信息带给server端，server端修改把登录信息存在cookie里，再返回给客户端
+
 
 ## redis
 
