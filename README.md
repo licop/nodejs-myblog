@@ -109,6 +109,12 @@ nodejs可以使用vscode和chrome进行调试
     - 浏览器可以通过javascript修改cookie(有限制)
 - server端操作cookie
    - 客户端把登录信息带给server端，server端修改把登录信息存在cookie里，再返回给客户端
+   - httpOnly保证数据不被前端修改
+
+- session
+   - cookie登录会暴露用户名，解决办法cookie中存储userid，server对应username
+   - 解决方案： session，即server端存储用户信息
+   - 
 
 
 ## redis

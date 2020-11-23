@@ -1,7 +1,16 @@
 const querystinrg = require('querystring');
 const handleUserRouter = require('./src/route/user');
 const handleBlogRouter = require('./src/route/blog');
-const { getPriority } = require('os');
+const user = require('./src/controller/user');
+
+const SESSION_DATA = {};
+// 获取cookie过期时间
+const getCookieExpires = () => {
+    const d = new Date();
+    d.setTime(d.getTime() + (24 * 60 * 60 * 1000))
+
+    return d.toGMTString();
+}
 
 // 用于处理postData
 const getPostData = (req) => {
@@ -15,7 +24,6 @@ const getPostData = (req) => {
             return
         }
         
-
         let postData = '';
         req.on('data', chunk => {
             postData += chunk.toString();
@@ -46,11 +54,24 @@ const serverHandle = (req, res) => {
             return 
         }
         const arr = item.split('=');
-        const key = arr[0];
-        const val = arr[1];
+        const key = arr[0].trim();
+        const val = arr[1].trim();
         req.cookie[key] = val;
-
     });
+
+    // 解析session
+    let needSetCookie = false;
+    let userId = res.cookie ? res.cookie.userid : ''
+    if(userId) {
+        if(!SESSION_DATA[userId]) {
+            SESSION_DATA[userId] = {};
+        }    
+    } else {
+        needSetCookie = true;
+        userId = `${Date.now()}_${Math.random()}`;
+        SESSION_DATA[userId] = {};
+    }
+    res.session = SESSION_DATA[userId];
     
     // 处理postdata
     getPostData(req).then(postData => {
@@ -60,21 +81,27 @@ const serverHandle = (req, res) => {
 
         if(bolgResult) {
             bolgResult.then(blogData => {
+                if(needSetCookie) {
+                    res.setHeader('Set-Cookie', `userid=${userId}; path=/; httpOnly; expires=${getCookieExpires()}`)
+                }
                 res.end(
                     JSON.stringify(blogData)
                 )
             })
             return;
         }
+
         if(userResult) {
             userResult.then(userData => {
+                res.setHeader('Set-Cookie', `userid=${userId}; path=/; httpOnly; expires=${getCookieExpires()}`)
+
                 res.end(
                     JSON.stringify(userData)
                 )
             })
             return;
         }
-
+        
         res.writeHead(404, {"Content-type": "text-plain"});
         res.write("404 not found/n");
         res.end();
