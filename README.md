@@ -114,11 +114,16 @@ nodejs可以使用vscode和chrome进行调试
 - session
    - cookie登录会暴露用户名，解决办法cookie中存储userid，server对应username
    - 解决方案： session，即server端存储用户信息
-   - 
+   - session 访问频繁，对性能要求高
+   - session 存储不是很大
 
 
 ## redis
-
+   - [redis 教程](https://www.runoob.com/redis/redis-tutorial.html)
+   - webserver最常见的缓存数据库，数据放在内存中
+   - 相比与mysql，访问速度快（内存和硬盘不是一个级别）, redis将数据存储在内存中，数据库将数据存储在硬盘中
+   - 成本更高，可存储的数据量更小（内存的硬伤）
+   - 网站数据不适合redis，断电后数据不能丢失，数据量大
 
 ## 需求分析
   - 
