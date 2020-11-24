@@ -1,6 +1,6 @@
 const redis = require('redis');
-const {REDIS_CONFIG} = require('../conf/db');
-const redisClient = redis.createClient(REDIS_CONFIG.port, REDIS_CONFIG.host);
+const {REDIS_CONF} = require('../conf/db');
+const redisClient = redis.createClient(REDIS_CONF.port, REDIS_CONF.host);
 
 redisClient.on('error', err => {
     console.error(err)
@@ -24,7 +24,7 @@ function get(key) {
                 resolve(null);
                 return
             }
-            
+
             try {
                 resolve(JSON.parse(val));
             } catch {

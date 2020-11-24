@@ -1,6 +1,17 @@
 const {getList, getDetail, newBlog, updateBlog, delBlog} = require('../controller/blog');
 const {SuccessModule, ErrorModule} = require('../module/resModule')
 
+// 统一登录验证
+const loginCheck = (req) => {
+    console.log(req.session.username, 6);
+    if(!req.session.username) {
+        return Promise.resolve(
+            new ErrorModule('尚未登录')
+        )
+    }
+}
+
+
 const handleBlogRouter = (req, res) => {
     const method = req.method;
     const path = req.path;
@@ -26,16 +37,25 @@ const handleBlogRouter = (req, res) => {
     }
     // 新建博客
     if(method === 'POST' && path === '/api/blog/new') {
+        if(loginCheck(req)) {
+            // 未登录
+            return loginCheck(req);
+        }
+
         let result = newBlog(req.body);
-        req.body.author = 'zhangsan'; // 假数据
+        req.body.author = req.session.username; // 假数据
         return result.then(data => {
             return new SuccessModule(data)
         })
     }
     // 更新博客
     if(method === 'POST' && path === '/api/blog/update') {
+        if(loginCheck(req)) {
+            // 未登录
+            return loginCheck(req);
+        }
+
         let result = updateBlog(id, req.body);
-        req.body.author = 'zhangsan'; // 假数据
         return result.then(val => {
             if(val) {
                 return new SuccessModule(val);
@@ -46,7 +66,13 @@ const handleBlogRouter = (req, res) => {
     }
     // 删除博客
     if(method === 'POST' && path === '/api/blog/del') {
-        const result = delBlog(id);
+        if(loginCheck(req)) {
+            // 未登录
+            return loginCheck(req);
+        }
+        const author = req.session.username;
+        const result = delBlog(id, author);
+
         return result.then(val => {
             if(result) {
                 return new SuccessModule()
