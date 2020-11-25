@@ -1,4 +1,5 @@
 const {exec} = require('../db/mysql');
+const xss = require('xss');
 
 const getList = (author, keyword) => {
     // 先返回假数据，格式是正确的
@@ -28,7 +29,7 @@ const newBlog = (blogData = {}) => {
     
     let sql = `
         insert into blogs(title, content, createtime, author)
-        values('${title}', '${content}', ${createTime}, '${author}')
+        values('${xss(title)}', '${xss(content)}', ${createTime}, '${author}')
     `;
 
     return exec(sql).then((insertData) => {
@@ -38,7 +39,7 @@ const newBlog = (blogData = {}) => {
 
 const updateBlog = (id, blogData = {}) => {
     const {title, content} = blogData;
-    const sql = `update blogs set title='${title}', content='${content}' where id=${id}`
+    const sql = `update blogs set title='${xss(title)}', content='${xss(content)}' where id=${id}`
 
     return exec(sql).then((data) => {
         if(data.affectedRows > 0) {
