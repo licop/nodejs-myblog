@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "cross-env NODE_ENV=dev nodemon ./bin/www"
+    "start": "cross-env NODE_ENV=dev nodemon ./bin/www",
+    "prd": "cross-env NODE_ENV=production nodemon ./bin/www"
+
   },
   "dependencies": {
     "connect-redis": "^5.0.0",
