@@ -38,10 +38,10 @@
                 username,
                 password
             }
-            console.log(40);
             post(url, data).then(res => {
-                consoel.log(res, 41);
+                console.log(res, 41);
                 if (res.errno === 0) {
+                    
                     // 登录成功
                     location.href = './admin.html'
                 } else {
