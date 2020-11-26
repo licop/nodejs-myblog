@@ -1,7 +1,7 @@
 const { ErrorModel } = require('../module/resModule');
 
 module.exports = (req, res, next) => {
-    if(res.session.username) {
+    if(req.session.username) {
         next();
         return;
     }

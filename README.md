@@ -124,6 +124,11 @@ nodejs可以使用vscode和chrome进行调试
    - 相比与mysql，访问速度快（内存和硬盘不是一个级别）, redis将数据存储在内存中，数据库将数据存储在硬盘中
    - 成本更高，可存储的数据量更小（内存的硬伤）
    - 网站数据不适合redis，断电后数据不能丢失，数据量大
+   - 命令
+     - redis-cli
+     - keys *
+     - get key
+     - set key value
 
 ## nignx 
    - 高性能web服务器

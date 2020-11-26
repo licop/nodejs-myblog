@@ -11,7 +11,6 @@ const loginCheck = (req) => {
     }
 }
 
-
 const handleBlogRouter = (req, res) => {
     const method = req.method;
     const path = req.path;
@@ -22,7 +21,7 @@ const handleBlogRouter = (req, res) => {
         const author = req.query.author || '';
         const keyword = req.query.keyword || '';        
         const result = getList(author, keyword);
-
+        
         return result.then(listData => {
             return new SuccessModule(listData);
         })
