@@ -180,7 +180,7 @@ nodejs可以使用vscode和chrome进行调试
         - pm2 info <AppName>/id
         - pm2 log <AppName>/id
         - pm2 monit 
-      - 
+      - 配置文件 pm2.conf.json
    - 功能
      - 进程守护，系统崩溃自动重启
      - 启动多进程，充分利用cpu和内存
@@ -188,4 +188,39 @@ nodejs可以使用vscode和chrome进行调试
    - 进程守护
      - node app.js 和 nondemon app.js, 进程崩溃则不能访问
      - pm2遇到进程崩溃会自动重启
+   - 多进程
+     - 为何使用多进程
+       - 操作系统会限制一个进程的最大可用内存
+       - 内存：无法利用机器的全部内存
+       - cpu：无法充分利用多核cpu优势
+
+## node进阶
+   - orm操作数据库(sequelize),连表操作
+   - 代码结构和流程的规范
+   - nodejs最佳实践
+
+## node 深入
+
+   ### nodejs是什么？和前端有啥区别？
+      - nodejs是基于Chrome V8引擎的javascript运行时
+      - nodejs出现之前，js只能在浏览去中运行
+      - nodejs出现之后，js可以在任何安装nodejs的环境中运行
+   ### nodejs如何调试
+      - 参考 2-5
+      - 启动nodejs服务时，使用inspect
+      - 代码中使用debuger断点
+      - 使用chrome调试 chrome://inspect
+   ### 当前文件和当前目录的路径，如何获取？
+      - __filename
+      - __dirname
+      - 两个都是全局变量
+   ### commonjs和ES6-Module的区别
+      - 语法不同 
+      - commonjs是动态引入，执行时引入 (require 可以再任意地方使用)
+      - es6 module是静态引入，编译时引入(import 必须放在最外层)
+   
+   
+      
+
+   
    
