@@ -169,11 +169,23 @@ nodejs可以使用vscode和chrome进行调试
    - 集群和服务拆分
    - 日志记录 
 
-## 需求分析
-  - 
-
-
-## 技术方案设计
-
-
 ## pm2
+   - 介绍
+      - 安装 `npm install pm2 -g` `pm2 --version`
+      - 基本使用命令
+        - pm2 start
+        - pm2 list
+        - pm2 restart <AppName>/id
+        - pm2 stop <AppName>/id/all
+        - pm2 info <AppName>/id
+        - pm2 log <AppName>/id
+        - pm2 monit 
+      - 
+   - 功能
+     - 进程守护，系统崩溃自动重启
+     - 启动多进程，充分利用cpu和内存
+     - 自带日志记录功能
+   - 进程守护
+     - node app.js 和 nondemon app.js, 进程崩溃则不能访问
+     - pm2遇到进程崩溃会自动重启
+   
