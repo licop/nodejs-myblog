@@ -15,12 +15,14 @@ function getFileContent(fileName) {
     
 }
 
-async function consoleData() {
-    await getFileContent('a.json')
+// async function consoleData() {
+//     await getFileContent('a.json')
 
-    await getFileContent('b.json')
+//     await getFileContent('b.json')
 
-    await getFileContent('c.json')
-}
+//     await getFileContent('c.json')
+// }
 
-consoleData();
+// consoleData();
+
+
