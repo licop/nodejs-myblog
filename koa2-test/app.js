@@ -1,6 +1,10 @@
 const Koa = require('koa');
 const app = new Koa();
 
+console.log(app.env, 4);
+console.log(app.proxy, 5);
+console.log(app.proxyIpHeader, 6);
+console.log(app.maxIpsCount, 7);
 // logger
 app.use(async (ctx, next) => {
     console.log('第一层洋葱 -- 开始');
@@ -8,7 +12,6 @@ app.use(async (ctx, next) => {
     const rt = ctx.response.get('X-Response-Time');
     console.log(`${ctx.method} ${ctx.url} - ${rt}`);
     console.log('第一层洋葱 -- 结束');
-
 });
   
 // x-response-time
@@ -19,7 +22,6 @@ app.use(async (ctx, next) => {
     const ms = Date.now() - start;
     ctx.set('X-Response-Time', `${ms}ms`);
     console.log('第二层洋葱 -- 结束');
-
 });
 
 // response

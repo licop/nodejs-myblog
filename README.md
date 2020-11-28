@@ -57,7 +57,7 @@ nodejs可以使用vscode和chrome进行调试
     - 客户端接收到返回数据，处理数据(如渲染页面，执行js)
  - get请求客户端向服务端索取信息，post请求客户端向客户端传递信息
  - post请求浏览器无法直接模拟，需要手写js，或者使用postman
- - `nodemon` 检测项目中的文件，一旦发现有改动，nonmo会重启
+ - `nodemon` 检测项目中的文件，一旦发现有改动，nodemo会重启
  
 ## mysql
 
@@ -116,7 +116,7 @@ nodejs可以使用vscode和chrome进行调试
    - 解决方案： session，即server端存储用户信息
    - session 访问频繁，对性能要求高
    - session 存储不是很大
-
+   - session不能存储到node进程中： 进程有内存限制，进程的内存是相互隔离的
 
 ## redis
    - [redis 教程](https://www.runoob.com/redis/redis-tutorial.html)
@@ -244,6 +244,25 @@ nodejs可以使用vscode和chrome进行调试
          - nodejs异步API更多，宏任务类型也更多
          - nodejs的evnet loop分为六个阶段，要按顺序执行
          - 微任务中process.nextTick优先级更高
+   ### session如何实现登录
+         - session和cookie之间的关系
+   ### 描述koa2和express的中间件机制
+     - 从代码来看，中间件就是个函数
+     - 从业务上来看，中间件是个独立的业务模块
+     - 模块的拆分，模块的流转，即可完成复杂的功能
+
+
+   ### node读取大文件 （stream）
+     - util/readline
+
+   ### nodejs先上为何开启多进程（pm2）
+     - 高效使用多核cpu
+     - 充分利用服务器内存
+     - 压榨服务器，不浪费资源
+
+   
+
+   
 
 
    
