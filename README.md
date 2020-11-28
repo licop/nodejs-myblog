@@ -218,9 +218,33 @@ nodejs可以使用vscode和chrome进行调试
       - 语法不同 
       - commonjs是动态引入，执行时引入 (require 可以再任意地方使用)
       - es6 module是静态引入，编译时引入(import 必须放在最外层)
-   
-   
+      - tree shaking只能对 es6 module 进行代码裁剪
+   ### path.resolve和path.join的区别
+      - path.resolve是获取绝对路径path.join是获取相对路径
+   ### 事件循环event loop在nodejs和浏览器中的区别
+      - 浏览器
+         - 宏任务： setTimeout setInterval, ajax
+         - 微任务： process.nextTick, Promise，async/await
+         - call stack空闲时，将出发event loop机制，执行宏任务
+         - 触发event loop之前，会把现有的微任务都执行完
+         - 所以微任务比宏任务执行时间更早
       
+      - nodejs
+         - 宏任务：setImmediate， I/O文件网络， Socket链接，如连接mysql
+         - 执行步骤： 执行同步代码；执行微任务；执行宏任务，回到第二步
+         - 宏任务比较多，微任务相对较少
+         - 六个阶段(处理宏任务)
+           - **timers** 执行`setTimeout`, `setInterval`的回调
+           - **I/O callback** 处理网络，流，tcp的错误回调
+           - **idle，prepare** 闲置阶段，node内部使用
+           - **poll** 执行poll中的I/O队列，检查定时器是否到时间
+           - **check** 存放`setImmediate`回调
+           - **close callbacks** 关闭回调，例如`Socket.on('close')`
+      - 浏览器和nodejs区别
+         - nodejs异步API更多，宏任务类型也更多
+         - nodejs的evnet loop分为六个阶段，要按顺序执行
+         - 微任务中process.nextTick优先级更高
+
 
    
    
